@@ -27,7 +27,7 @@ jobs:
           create-args: >-
             -c conda-forge -c bioconda
             hmmer=3.4 barrnap=1.10.6
-      - run: julia --startup-file=no --project=. scripts/develop.jl
+      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate()'
       - run: julia --startup-file=no --project=. benchmark/compare.jl
       - uses: actions/upload-artifact@v4
         if: always()

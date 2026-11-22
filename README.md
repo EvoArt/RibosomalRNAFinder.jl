@@ -81,8 +81,9 @@ using Pkg
 Pkg.add("FindRNA")
 ```
 
-Until ProfileHMMs and FindRNA are registered, run `julia --project=. scripts/develop.jl`
-in a checkout of this repository.
+ProfileHMMs is registered. Until FindRNA's first registration merges, install it
+with `Pkg.add(url="https://github.com/EvoArt/FindRNA.jl")`. In a checkout of this
+repository, run `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
 
 ## Licence
 

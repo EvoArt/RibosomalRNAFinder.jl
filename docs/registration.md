@@ -1,14 +1,12 @@
 # Registration
 
-ProfileHMMs (github.com/EvoArt/ProfileHMMs.jl) must be in General before
-FindRNA, which depends on it.
+ProfileHMMs 0.1.0 is registered in General (PR #176394, merged 18 November 2026).
+FindRNA's CI now installs dependencies from General without a development override.
 
-1. Register ProfileHMMs: comment `@JuliaRegistrator register` on the tested
-   commit of ProfileHMMs.jl. New packages wait three days in General.
-2. After ProfileHMMs is merged, check that this repository's CI passes against
-   the registered version (`scripts/develop.jl` is then unnecessary; delete it
-   and run `Pkg.test()` directly), then comment `@JuliaRegistrator register` on
-   that FindRNA commit.
+1. Run `julia --project=. -e 'using Pkg; Pkg.test()'` and check CI against
+   the registered ProfileHMMs release.
+2. Comment `@JuliaRegistrator register` on the tested FindRNA commit.
+   New packages wait three days in General.
 3. AutoMerge will flag the name FindRNA as close to the registered FoldRNA
    (Damerau–Levenshtein distance 2). Reply on the General PR explaining the
    difference (rRNA gene finding vs RNA folding) and ask for a manual merge.

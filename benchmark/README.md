@@ -6,7 +6,7 @@ reference call has exactly one FindRNA call with the same sequence, model and
 strand, endpoints within 10 bp, and that FindRNA makes no other calls.
 
 ```sh
-julia --project=. scripts/develop.jl
+julia --project=. -e 'using Pkg; Pkg.instantiate()'
 julia --project=. benchmark/compare.jl                  # synthetic fixture
 benchmark/fetch_genomes.sh genomes                      # accessions in genomes.txt
 julia --project=. benchmark/compare.jl genomes/CP148752.1.fasta

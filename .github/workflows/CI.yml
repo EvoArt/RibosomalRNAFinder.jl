@@ -22,7 +22,7 @@ jobs:
         with:
           version: ${{ matrix.julia }}
       - uses: julia-actions/cache@v2
-      - run: julia --startup-file=no --project=. scripts/develop.jl
+      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate()'
       - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.test()'
 
   # Same input and profiles for all three tools. One-to-one hit identity,
@@ -51,7 +51,7 @@ jobs:
           echo "$HOME/hmmer/bin" >> "$GITHUB_PATH"
           git clone --depth 1 --branch 0.9 https://github.com/tseemann/barrnap.git "$HOME/barrnap"
           echo "$HOME/barrnap/bin" >> "$GITHUB_PATH"
-      - run: julia --startup-file=no --project=. scripts/develop.jl
+      - run: julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate()'
       - name: Synthetic fixture
         run: julia --startup-file=no --project=. benchmark/compare.jl
         env:

@@ -31,7 +31,7 @@ fi
 export NHMMER="$TOOLS/bin/nhmmer"
 base_path="$PATH"
 export JULIA_NUM_THREADS="$SLURM_CPUS_PER_TASK" BENCH_THREADS="$SLURM_CPUS_PER_TASK" BENCH_REPEATS=3
-julia --startup-file=no --project=. scripts/develop.jl
+julia --startup-file=no --project=. -e 'using Pkg; Pkg.instantiate()'
 benchmark/fetch_genomes.sh genomes
 out="benchmark/results/athena-$SLURM_JOB_ID"
 failed=0
