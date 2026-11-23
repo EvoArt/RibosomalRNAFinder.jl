@@ -1,10 +1,10 @@
 """
-    FindRNA
+    RibosomalRNAFinder
 
 Find ribosomal RNA genes in FASTA files, in the manner of barrnap, from a
 native Julia session on Windows, macOS or Linux. See [`findrna`](@ref).
 """
-module FindRNA
+module RibosomalRNAFinder
 
 using BioSequences, FASTX, Tables
 using Printf: @sprintf
@@ -153,7 +153,7 @@ function write_gff(io::IO, r::RNAResult)
         feature = endswith(h.model, "rRNA") ? "rRNA" : "ncRNA"
         attrs = "Name=$(_gff_attr(h.model));product=$(_gff_attr(_product(h.model)))" *
                 (h.partial ? " (partial)" : "")
-        println(io, join((_gff_seqid(h.seqid), "FindRNA", feature, h.start, h.stop,
+        println(io, join((_gff_seqid(h.seqid), "RibosomalRNAFinder", feature, h.start, h.stop,
                           h.evalue, h.strand, '.', attrs), '\t'))
     end
     nothing

@@ -1,9 +1,9 @@
 # Comparisons with HMMER and barrnap
 
-`compare.jl` runs FindRNA, nhmmer 3.4 and barrnap on the same FASTA with the
+`compare.jl` runs RibosomalRNAFinder, nhmmer 3.4 and barrnap on the same FASTA with the
 same profiles (`data/bac.hmm`) and E-value cutoff (1e-5). It asserts that every
-reference call has exactly one FindRNA call with the same sequence, model and
-strand, endpoints within 10 bp, and that FindRNA makes no other calls.
+reference call has exactly one RibosomalRNAFinder call with the same sequence, model and
+strand, endpoints within 10 bp, and that RibosomalRNAFinder makes no other calls.
 
 ```sh
 julia --project=. -e 'using Pkg; Pkg.instantiate()'
@@ -20,7 +20,7 @@ reported (`barrnap-differences.tsv`) but asserted only on the synthetic
 fixture: barrnap 1.x uses Infernal covariance models.
 
 Each output directory keeps the raw nhmmer table, both GFFs, per-hit
-differences, tool versions, input/model SHA-256 and timings. FindRNA's first
+differences, tool versions, input/model SHA-256 and timings. RibosomalRNAFinder's first
 call (including any compilation) is reported separately from warm calls;
 reference timings are whole-process wall times.
 

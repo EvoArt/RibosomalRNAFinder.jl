@@ -1,5 +1,5 @@
 # Required references are never silently skipped. Output files retain raw evidence.
-using FindRNA, ProfileHMMs, Test, SHA, TOML
+using RibosomalRNAFinder, ProfileHMMs, Test, SHA, TOML
 include(joinpath(@__DIR__, "..", "test", "fixtures.jl"))
 
 function parse_nhmmer(path)
@@ -134,7 +134,7 @@ function benchmark_main()
     end
     opts = (progress=false,threaded=threads>1,evalue=1e-5)
     cold = @elapsed hits = findrna(fasta;opts...)
-    println("FindRNA first call: ",cold," seconds, ",length(hits)," hits")
+    println("RibosomalRNAFinder first call: ",cold," seconds, ",length(hits)," hits")
     flush(stdout)
     write_gff(joinpath(out,"findrna.gff"),hits)
     jt = [@elapsed(findrna(fasta;opts...)) for _ in 1:repeats]
@@ -155,7 +155,7 @@ function benchmark_main()
         "findrna_hits"=>length(hits),"nhmmer_hits"=>length(refs),"barrnap_hits"=>length(br))
     open(joinpath(out,"timings.toml"),"w") do io; TOML.print(io,report); end
     write_scores(joinpath(out,"nhmmer-scores.tsv"),fwd,refs)
-    println("Median seconds: FindRNA warm=",median_time(jt),"; forward=",median_time(ft),"; nhmmer=",median_time(nt),"; barrnap=",median_time(bt))
+    println("Median seconds: RibosomalRNAFinder warm=",median_time(jt),"; forward=",median_time(ft),"; nhmmer=",median_time(nt),"; barrnap=",median_time(bt))
     if get(ENV,"BARRNAP_MODERN","false") == "true"
         # Different models/algorithms: report all raw calls; no fabricated parity.
         @testset "HMMER reference" begin

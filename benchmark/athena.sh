@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=12G
 #SBATCH --time=01:00:00
-# Speed and output comparison of FindRNA with HMMER 3.4 nhmmer, barrnap 0.9
+# Speed and output comparison of RibosomalRNAFinder with HMMER 3.4 nhmmer, barrnap 0.9
 # (same profiles) and modern barrnap (Infernal CMs; reported, not asserted).
 # Submit from a checkout: sbatch benchmark/athena.sh
 # Tools are built once under $TOOLS (default ~/findrna-tools).

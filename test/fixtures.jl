@@ -1,8 +1,8 @@
 # Fully deterministic synthetic fixtures derived from the bundled profiles.
-# Both reference tools and FindRNA receive exactly these same sequences.
+# Both reference tools and RibosomalRNAFinder receive exactly these same sequences.
 using BioSequences, ProfileHMMs
 function make_fixture(path)
-    ps = parse_hmm_file(FindRNA.default_profiles())
+    ps = parse_hmm_file(RibosomalRNAFinder.default_profiles())
     seqs = [LongDNA{4}(join("ACGT"[argmin(p.match_emissions[:,k])] for k in 1:p.length)) for p in ps]
     open(path,"w") do io
         for (p,s) in zip(ps,seqs)

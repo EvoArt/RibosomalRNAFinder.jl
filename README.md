@@ -1,4 +1,4 @@
-# FindRNA.jl
+# RibosomalRNAFinder.jl
 
 Find ribosomal RNA genes in genomes and assemblies, as
 [barrnap](https://github.com/tseemann/barrnap) does, from a plain Julia session:
@@ -9,7 +9,7 @@ session as much as for scripts, and fits alongside
 [AssignTaxonomy.jl](https://github.com/EvoArt/AssignTaxonomy.jl).
 
 ```julia
-using FindRNA
+using RibosomalRNAFinder
 hits = findrna("genome.fna")                     # 16S, 23S and 5S on both strands
 ```
 ```
@@ -50,7 +50,7 @@ Defaults follow barrnap 0.9:
 | `profiles`  | bacterial 16S/23S/5S | any HMMER3 nucleotide profile file |
 | `scoring`   | `:viterbi` | `:forward` rescores genes as nhmmer does (bits, bias and E-values within ~1 bit of nhmmer's; ~10% slower) |
 | `threaded`  | `true`  | use all Julia threads (start Julia with `-t auto`) |
-| `progress`  | interactive | progress bar; `FindRNA.setprogress!(false)` turns it off |
+| `progress`  | interactive | progress bar; `RibosomalRNAFinder.setprogress!(false)` turns it off |
 
 The bundled profiles are barrnap 0.9's bacterial models (from Rfam). Archaeal,
 mitochondrial or eukaryotic HMMER3 profiles can be passed with `profiles`.
@@ -60,7 +60,7 @@ mitochondrial or eukaryotic HMMER3 profiles can be passed with `profiles`.
 Searches use [ProfileHMMs.jl](https://github.com/EvoArt/ProfileHMMs.jl), a
 native Julia implementation of the nhmmer pipeline: SIMD ungapped seeds, then
 local Viterbi alignment around them. On five bacterial genomes (3.7–6.8 Mb,
-GC 58–68%), FindRNA reports the same 69 genes as nhmmer 3.4 and barrnap 0.9
+GC 58–68%), RibosomalRNAFinder reports the same 69 genes as nhmmer 3.4 and barrnap 0.9
 with the same profiles, with no extra or missing calls and endpoints within
 6 bp. CI checks this on every push; see [benchmark/](benchmark/README.md).
 
@@ -69,7 +69,7 @@ faster than nhmmer with the same threads; the first call in a session
 is barely slower, because the package is precompiled.
 
 By default bit scores are Viterbi scores without nhmmer's composition-bias correction,
-so they differ from nhmmer's by a few percent. With `scoring=:forward` FindRNA rescores
+so they differ from nhmmer's by a few percent. With `scoring=:forward` RibosomalRNAFinder rescores
 each gene exactly as nhmmer does, and bits and bias agree with nhmmer's to about a bit.
 Modern barrnap (1.x) uses Infernal covariance models instead; its calls are
 compared but not required to agree.
@@ -78,12 +78,10 @@ compared but not required to agree.
 
 ```julia
 using Pkg
-Pkg.add("FindRNA")
+Pkg.add("RibosomalRNAFinder")
 ```
 
-ProfileHMMs is registered. Until FindRNA's first registration merges, install it
-with `Pkg.add(url="https://github.com/EvoArt/FindRNA.jl")`. In a checkout of this
-repository, run `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
+In a checkout of this repository, run `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
 
 ## Licence
 

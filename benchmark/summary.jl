@@ -15,7 +15,7 @@ function tally(path)
 end
 
 root = isempty(ARGS) ? joinpath(@__DIR__, "results") : ARGS[1]
-println("| run | FindRNA first / warm / forward (s) | nhmmer (s) | barrnap (s) | vs nhmmer: matched / endpoints >10 bp / missing / extra | vs barrnap |")
+println("| run | RibosomalRNAFinder first / warm / forward (s) | nhmmer (s) | barrnap (s) | vs nhmmer: matched / endpoints >10 bp / missing / extra | vs barrnap |")
 println("|---|---|---|---|---|---|")
 for d in sort(readdir(root; join=true))
     f = joinpath(d, "timings.toml"); isfile(f) || continue

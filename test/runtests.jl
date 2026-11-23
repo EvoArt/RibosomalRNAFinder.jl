@@ -1,7 +1,7 @@
-using Test, FindRNA, ProfileHMMs, BioSequences, Tables
+using Test, RibosomalRNAFinder, ProfileHMMs, BioSequences, Tables
 include("fixtures.jl")
 
-@testset "FindRNA" begin
+@testset "RibosomalRNAFinder" begin
     ps = parse_hmm_file(default_profiles())
     @test getfield.(ps, :name) == ["16S_rRNA", "23S_rRNA", "5S_rRNA"]
     @test getfield.(ps, :length) == [1533, 2906, 119]
@@ -65,8 +65,8 @@ include("fixtures.jl")
         @test isempty(empty) && isempty(extract_sequences(empty))
         strict = findrna(path; evalue=1e-40, progress=false)   # synthetic 5S: E ≈ 1e-34
         @test !isempty(strict) && all(h -> h.model != "5S_rRNA", strict)
-        @test FindRNA._gff_seqid("contig 1;x") == "contig%201%3Bx"
-        @test FindRNA._gff_attr("a b;c=d,é") == "a b%3Bc%3Dd%2Cé"
+        @test RibosomalRNAFinder._gff_seqid("contig 1;x") == "contig%201%3Bx"
+        @test RibosomalRNAFinder._gff_attr("a b;c=d,é") == "a b%3Bc%3Dd%2Cé"
     end
 end
 

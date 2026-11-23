@@ -3,8 +3,8 @@
 Skylake-AVX512 node; Julia 1.12.7; HMMER 3.4; barrnap 0.9 and 1.10.6. Rows `0.9-*`
 and `modern-*` use 4 threads for every tool, `t1-*` one thread. All tools
 searched with E-value 1e-5; nhmmer and barrnap 0.9 used the same profiles as
-FindRNA. Times are medians of 3 runs (whole-process wall time for nhmmer and
-barrnap). "forward" is FindRNA with `scoring=:forward` (nhmmer-style scores);
+RibosomalRNAFinder. Times are medians of 3 runs (whole-process wall time for nhmmer and
+barrnap). "forward" is RibosomalRNAFinder with `scoring=:forward` (nhmmer-style scores);
 its bits and bias were within 2 bits of nhmmer's for every gene
 (`nhmmer-scores.tsv` in each result directory).
 
@@ -12,7 +12,7 @@ Rows marked `modern` compare against barrnap 1.10.6 (Infernal covariance
 models); its 23S calls are absent for three genomes and its 5S boundaries
 differ by up to 12 bp, so these rows are reported, not asserted.
 
-| run | FindRNA first / warm / forward (s) | nhmmer (s) | barrnap (s) | vs nhmmer: matched / endpoints >10 bp / missing / extra | vs barrnap |
+| run | RibosomalRNAFinder first / warm / forward (s) | nhmmer (s) | barrnap (s) | vs nhmmer: matched / endpoints >10 bp / missing / extra | vs barrnap |
 |---|---|---|---|---|---|
 | 0.9-CP148752.1 | 1.16 / 0.94 / 1.01 | 4.53 | 3.99 | 25 / 0 / 0 / 0 (≤2 bp) | 25 / 0 / 0 / 0 (≤2 bp) |
 | 0.9-CP148753.1 | 0.94 / 0.77 / 0.8 | 3.62 | 3.4 | 13 / 0 / 0 / 0 (≤3 bp) | 13 / 0 / 0 / 0 (≤3 bp) |
