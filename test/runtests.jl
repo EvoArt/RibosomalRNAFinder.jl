@@ -30,6 +30,9 @@ include("fixtures.jl")
         @test Tables.istable(typeof(r))
         cols = Tables.columntable(r)
         @test cols.seqid == [h.seqid for h in r] && eltype(cols.partial) == Bool
+        @test Tables.schema(r).names == fieldnames(RNAHit)
+        @test sprint(show, r) == "RNAResult(9 hits)"
+        @test sprint(show, r[1]) == "RNAHit($(r[1].model), $(r[1].seqid):$(r[1].start)-$(r[1].stop)($(r[1].strand)))"
         @test r[1:2] isa RNAResult && length(r[1:2]) == 2
         @test filter(h -> h.model == "5S_rRNA", r) isa RNAResult
         extracted = extract_sequences(r)
@@ -82,6 +85,7 @@ end
         r = findrna(path; models=["16S_rRNA"], progress=false)
         @test [h.seqid for h in r] == ["half"]
         @test only(r).partial
+        @test endswith(sprint(show, only(r)), ", partial)")
         @test occursin("(partial)", sprint(write_gff, r))
         kept = findrna(path; models=["16S_rRNA"], reject=0.0, progress=false)
         @test sort([h.seqid for h in kept]) == ["half", "tenth"]
