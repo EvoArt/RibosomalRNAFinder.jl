@@ -1,5 +1,6 @@
 # RibosomalRNAFinder.jl
 
+[![Docs](https://img.shields.io/badge/docs-dev-blue.svg)](https://EvoArt.github.io/RibosomalRNAFinder.jl/dev/)
 [![CI](https://github.com/EvoArt/RibosomalRNAFinder.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/EvoArt/RibosomalRNAFinder.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Coverage](https://codecov.io/gh/EvoArt/RibosomalRNAFinder.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/EvoArt/RibosomalRNAFinder.jl)
 
